@@ -63,6 +63,8 @@ class SimplerAE2(nn.Module):
             nn.BatchNorm2d(16)  
         )# out [BS, 16, 39, 39]
 
+        #self.addC1toT2 = nn.Add
+
         # in [BS, 16, 39, 39]
         self.trans2 = nn.Sequential(
             nn.ConvTranspose2d(
@@ -75,18 +77,14 @@ class SimplerAE2(nn.Module):
             nn.ReLU(),
             nn.BatchNorm2d(3)  
         )# out [BS, 3, 79, 79]
-
-        #self.sig = nn.Sigmoid()
-        #self.tanh = nn.Tanh()
         
     def forward(self, x):
-        x = self.conv1(x)
-        x = self.conv2(x)
-        x = self.flat(x)
+        x1 = self.conv1(x)
+        x2 = self.conv2(x1)
+        x = self.flat(x2)
         x = x.view(x.size(0), 32, 19, 19)
         x = self.trans1(x) 
+        x = x.add(x1)
         output = self.trans2(x)
-        #output = self.tanh(x)
-         
-        #output = self.sig(x)
+
         return output, x    # return x for visualization
