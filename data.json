@@ -1,0 +1,15 @@
+{
+    "mean": {
+        "vmc0": 85.19863783087732,
+        "vmc1": 95.80046169787673,
+        "vmc2": 110.46739578568737,
+        "vmbw": 98.9741312669843
+    },
+    "std": {
+        "stdc0": 59.78538276211467,
+        "stdc1": 62.35465792133885,
+        "stdc2": 69.05499827214109,
+        "stdbw": 62.70191455941479
+    },
+    "about":"these values refer to the lfw dataset. Mean and STD calculated over the entire dataset, divided by channel and also for the grayscale version of the dataset"
+}
