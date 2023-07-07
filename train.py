@@ -10,10 +10,10 @@ import os
 from copy import copy
 import time
 
-LOAD_CHKP = False
+LOAD_CHKP = True
 VIS_DEBUG = True
 SAVE_PATH = "checkpoints/"
-VISUAL = 20
+VISUAL = 400
 BATCH = 16
 EPOCH = 300
 LR = 1e-3
@@ -48,7 +48,7 @@ epoch = 0
 
 #if set, load the a saved checkpoint
 if (LOAD_CHKP):
-    chkp_path = "checkpoints/run_1688585646/checkpoint_299.chkp"
+    chkp_path = "checkpoints/run_1688662207/checkpoint_91.chkp"
     checkpoint = torch.load(chkp_path)
     ae.load_state_dict(checkpoint['model_state_dict'])
     opt.load_state_dict(checkpoint['optimizer_state_dict'])
@@ -136,7 +136,7 @@ for i in range(EPOCH):
 
             cv.imshow("encode_decode_result", np.vstack([np.hstack([Ximg,yimg,pred]),np.hstack([ex_Ximg,ex_yimg,ex_pred])]))
             cv.imwrite(img_savepath+"img_"+str(i)+"_"+str(count)+".jpg",np.hstack([ex_Ximg,ex_yimg,ex_pred]))
-            print("batch_loss: ", loss.item()/BATCH)
+            print("batch_loss: ", round(loss.item()/BATCH,4))
             cv.waitKey(1)
 
         epochLoss += loss.item()
